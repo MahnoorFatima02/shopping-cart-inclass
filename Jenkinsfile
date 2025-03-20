@@ -81,7 +81,7 @@
 
 pipeline {
     agent any
-    
+
     environment {
          MAVEN_HOME = '/opt/homebrew/Cellar/maven/3.9.9/libexec'
          PATH = "/opt/homebrew/bin:${MAVEN_HOME}/bin:${env.PATH}"
