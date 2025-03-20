@@ -61,18 +61,32 @@ pipeline {
 //                         }
 //                     }
 //                 }
-    stage('Push Docker Image to Docker Hub') {
-                steps {
-                    script {
-                        withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS_ID, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                            // Log in to Docker Hub
-                            sh "echo ${DOCKERHUB_PASSWORD} | docker login -u ${DOCKERHUB_USER} --password-stdin"
+//     stage('Push Docker Image to Docker Hub') {
+//                 steps {
+//                     script {
+//                         withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS_ID, usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+//                             // Log in to Docker Hub
+//                             sh "echo ${DOCKERHUB_PASSWORD} | docker login -u ${DOCKERHUB_USER} --password-stdin"
+//
+//                             // Push Docker images to Docker Hub
+//                             sh "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
+//                         }
+//                     }
+//                 }
+//             }
 
-                            // Push Docker images to Docker Hub
-                            sh "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
-                        }
-                    }
-                }
+stage('Push Docker Image to Docker Hub') {
+    steps {
+        script {
+            withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS_ID, usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                sh """
+                echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                docker tag ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}
+                docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}
+                """
             }
+        }
+    }
+}
     }
 }
