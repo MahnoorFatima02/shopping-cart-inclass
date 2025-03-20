@@ -10,9 +10,9 @@ pipeline {
         }
     stages {
         stage('Checkout') {
-            steps {
-                git 'git@github.com:MahnoorFatima02/shopping-cart-inclass.git'
-            }
+              steps {
+                  git branch: 'main', url: 'git@github.com:MahnoorFatima02/shopping-cart-inclass.git'
+              }
         }
         stage('Build') {
             steps {
