@@ -86,7 +86,7 @@ pipeline {
          MAVEN_HOME = '/opt/homebrew/Cellar/maven/3.9.9/libexec'
          PATH = "/opt/homebrew/bin:${MAVEN_HOME}/bin:${env.PATH}"
         DOCKERHUB_CREDENTIALS_ID = 'Docker_hub'
-        DOCKERHUB_REPO = 'mahnoor95/shopping-cart'
+        DOCKERHUB_REPO = 'mahnoor95/shoppingcart'
         DOCKER_IMAGE_TAG = 'latest_v2'
         DOCKERHUB_USER = 'mahnoor95'
     }
