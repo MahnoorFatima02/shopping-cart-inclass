@@ -4,14 +4,9 @@ pipeline {
              MAVEN_HOME = '/opt/homebrew/Cellar/maven/3.9.9/libexec'
              PATH = "/opt/homebrew/bin:${MAVEN_HOME}/bin:${env.PATH}"
              DOCKERHUB_CREDENTIALS_ID = 'Docker_hub'
-             DOCKERHUB_REPO = 'shopping-cart'
+             DOCKERHUB_REPO = 'mahnoor95/shopping-cart'
              DOCKER_IMAGE_TAG = 'v1'
              DOCKERHUB_USER = 'mahnoor95'
-
-            // Define Docker Hub repository name
-//             DOCKERHUB_REPO = 'mahnoor95/shopping-cart'
-            // Define Docker image tag
-//             DOCKER_IMAGE_TAG = 'latest_v1'
         }
     stages {
         stage('Checkout') {
@@ -49,7 +44,7 @@ pipeline {
                     steps {
                         // Build Docker image
                         script {
-                            def image = docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                            docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                         }
                     }
                 }
